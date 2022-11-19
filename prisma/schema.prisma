@@ -1,30 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   name      String
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  lists List[]
 }
 
 model Task {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  id     String  @id @default(cuid())
   title  String
-  isDone Boolean @default(false)
-  listId String  @db.ObjectId
+  isDone Boolean
+  listId String
+
+  list List @relation(fields: [listId], references: [id])
 }
 
 model List {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  id      String @id @default(cuid())
   name    String
-  ownerId String @db.ObjectId
+  ownerId String
+
+  tasks Task[]
+  owner User?  @relation(fields: [ownerId], references: [id])
 }
