@@ -7,8 +7,6 @@ class UserController {
   async create(request: Request, response: Response) {
     const { email, name, password } = request.body;
 
-    console.log(request.body);
-
     const userExists = await prisma.user.findUnique({
       where: { email },
     });
@@ -27,7 +25,7 @@ class UserController {
       },
     });
 
-    return response.json({ user });
+    return response.json(user);
   }
 }
 

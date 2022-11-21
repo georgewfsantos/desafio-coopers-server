@@ -19,9 +19,9 @@ model User {
 }
 
 model Task {
-  id     String  @id @default(cuid())
+  id     String   @id @default(cuid())
   title  String
-  isDone Boolean
+  isDone Boolean? @default(false)
   listId String
 
   list List @relation(fields: [listId], references: [id])
