@@ -14,7 +14,6 @@ routes.post("/sessions", SessionController.create);
 routes.use(authMiddleware);
 
 routes.get("/lists", ListController.show);
-routes.post("/lists", ListController.create);
 
 routes.post("/lists/:listId/tasks", TaskController.create);
 routes.patch("/lists/:listId/tasks/:taskId", TaskController.update);
