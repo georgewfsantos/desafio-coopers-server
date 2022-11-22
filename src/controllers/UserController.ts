@@ -27,7 +27,11 @@ class UserController {
         },
       },
       include: {
-        lists: true,
+        lists: {
+          include: {
+            tasks: true,
+          },
+        },
       },
     });
 
