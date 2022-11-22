@@ -22,6 +22,12 @@ class UserController {
         email,
         name,
         password: hashedPassword,
+        lists: {
+          create: [{ name: "To-do" }, { name: "Done" }],
+        },
+      },
+      include: {
+        lists: true,
       },
     });
 
