@@ -8,7 +8,11 @@ import { routes } from "./routes";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://desafio-coopers-web-georgewfsantos.vercel.app/",
+  })
+);
 app.use(express.json());
 app.use(routes);
 
