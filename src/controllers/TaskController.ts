@@ -29,7 +29,7 @@ class TaskController {
     const { isDone, title } = request.body;
     const { taskId } = request.params;
 
-    if (isDone) {
+    if (typeof isDone === "boolean") {
       const updatedTask = await prisma.task.update({
         where: { id: taskId },
         data: {
@@ -53,12 +53,12 @@ class TaskController {
   }
 
   async delete(request: Request, response: Response) {
-    const { taskId } = request.query;
+    const { taskId, done } = request.query;
     const { listId } = request.params;
 
     if (!taskId) {
       await prisma.task.deleteMany({
-        where: { listId },
+        where: { listId, isDone: done === "true" ? true : false },
       });
 
       return response.json({
@@ -73,7 +73,7 @@ class TaskController {
     });
 
     return response.json({
-      message: "The task was successfully deleted. ",
+      message: "The task was successfully deleted",
     });
   }
 }

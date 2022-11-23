@@ -23,7 +23,7 @@ class UserController {
         name,
         password: hashedPassword,
         lists: {
-          create: [{ name: "To-do" }, { name: "Done" }],
+          create: { name: "My To-do List" },
         },
       },
       include: {

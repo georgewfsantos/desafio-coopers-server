@@ -38,9 +38,6 @@ class ListController {
 
     return response.json(lists);
   }
-
-  async update(request: Request, response: Response) {}
-  async delete(request: Request, response: Response) {}
 }
 
 export default new ListController();
